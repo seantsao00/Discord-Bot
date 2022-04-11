@@ -58,7 +58,7 @@ module.exports = {
                         ])
                 )
 
-            await interaction.reply({ content: 'There are the search result', components: [row] });
+            await interaction.reply({ components: [row] });
 
             const collector = interaction.channel.createMessageComponentCollector({ time: 15000 });
 
@@ -69,7 +69,8 @@ module.exports = {
                 }
                 playMusic(i.values[0], interaction, player);
 
-                i.reply('Music are plying now!');
+                interaction.editReply({ content: 'Music is plying now!', components: [] });
+                i.deferUpdate();
             });
 
             collector.on('end', collected => {
